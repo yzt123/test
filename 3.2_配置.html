@@ -3,9 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>mdBook_Doc_zh</title>
-        
-        <meta name="robots" content="noindex" />
+        <title>配置 - mdBook_Doc_zh</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -80,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.html"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
+                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.html"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html" class="active"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -147,128 +145,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#mdbook" id="mdbook">mdBook</a></h1>
-<p>mdBook是一个命令行工具和Rust crate。可将Markdown文件创建为书籍。它与Gitbook非常相似,但用Rust编写.
-您正在阅读的内容，是mdBook输出的一个示例,同时也是一个高级文档.
-mdBook是免费的开源,你可以在GitHub找到源代码。问题和功能请求可以发布在GitHub issue tracker.</p>
-<h2><a class="header" href="#api文档" id="api文档">API文档</a></h2>
-<p>除了这本书,你还可以阅读Rustdoc生成的API 文档。如果您想将mdBook用作包或者编写新的渲染器，并需要浏览底层代码.</p>
-<h2><a class="header" href="#许可证" id="许可证">许可证</a></h2>
-<p>mdBook,所有源代码,都是在Mozilla Public License v2.0下发布的.</p>
-<h1><a class="header" href="#命令行工具" id="命令行工具">命令行工具</a></h1>
-<p>mdBook既可以用作命令行工具,也可以用作Rust crate。让我们首先关注命令行工具功能.</p>
-<h2><a class="header" href="#从二进制文件安装" id="从二进制文件安装">从二进制文件安装</a></h2>
-<p>在尽力而为的基础上,预先编译主要平台的二进制文件。访问 releases 页面下载适合您平台的版本.</p>
-<h2><a class="header" href="#从源代码安装" id="从源代码安装">从源代码安装</a></h2>
-<p>mdBook也可以从源代码安装</p>
-<h2><a class="header" href="#前提条件" id="前提条件">前提条件</a></h2>
-<p>mdBook是写的 Rust 因此需要Cargo编译。如果您还没有安装Rust，请现在就官方安装。</p>
-<h2><a class="header" href="#安装cratesio版本" id="安装cratesio版本">安装Crates.io版本</a></h2>
-<p>如果您已安装Rust和Cargo,则安装mdBook相当容易。您只需在终端中键入以下代码段:</p>
-<pre><code>cargo install mdbook
-</code></pre>
-<p>这将在Crates.io获取最新版本的源代码，并编译它。你需要添加Cargo的bin目录，到你的环境变量PATH.
-在您的终端，运行mdbook help验证它是否有效。
-恭喜你,你已经安装了mdBook!</p>
-<h2><a class="header" href="#安装-git-版本" id="安装-git-版本">安装 Git 版本</a></h2>
-<p>该 git 版本 包含所有最新的错误修复和功能, 且是在下一个版本中才发布Crates.io, 如果你不能等到下一个版本。你可以自己构建git版本。打开终端，并导航到您选择的目录。我们需要克隆git存储库,然后使用Cargo构建它.</p>
-<pre><code>git clone --depth=1 https://github.com/rust-lang-nursery/mdBook.git
-cd mdBook
-cargo build --release
-</code></pre>
-<p>可执行文件mdbook输出在./target/release文件夹,这应该添加到环境变量PATH中，方便使用。</p>
-<h1><a class="header" href="#init" id="init">init</a></h1>
-<h1><a class="header" href="#build" id="build">build</a></h1>
-<h1><a class="header" href="#watch-命令" id="watch-命令">watch 命令</a></h1>
-<p>当您希望在每次更改文件，都生成图书时, watch命令会很有用。你当然可以在每次更改文件反复发出mdbook build。但，聪明的是使用mdbook watch，这样就能观察您的文件,并会在您修改文件时，自动触发构建.</p>
-<h4><a class="header" href="#指定目录" id="指定目录">指定目录</a></h4>
-<p>watch命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.</p>
-<pre><code>mdbook watch path/to/book
-</code></pre>
-<h4><a class="header" href="#--open" id="--open">--open</a></h4>
-<p>当你使用--open(-o)选项,mdbook 将在您的默认 Web 浏览器中打开网页书.</p>
-<h4><a class="header" href="#--dest-dir" id="--dest-dir">--dest-dir</a></h4>
-<p>--dest-dir(-d)选项允许您更改书籍的输出目录。为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.</p>
-<h1><a class="header" href="#the-serve-command" id="the-serve-command">The serve command</a></h1>
-<p>serve 命令用于通过 HTTP 服务来预览书籍，默认情况下localhost:3000。此外,它还会观察图书的目录的更改,自动重建图书，以及为每次更改刷新客户端。</p>
-<blockquote>
-<p>websocket 连接用于触发客户端刷新.</p>
-</blockquote>
-<h4><a class="header" href="#指定目录-1" id="指定目录-1">指定目录</a></h4>
-<p>serve命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.</p>
-<pre><code>mdbook serve path/to/book
-</code></pre>
-<h4><a class="header" href="#server-选项" id="server-选项">Server 选项</a></h4>
-<p>serve有四个选项:</p>
-<ul>
-<li>HTTP 端口,</li>
-<li>WebSocket 端口,</li>
-<li>要侦听的 HTTP 主机名,以及</li>
-<li>要连接到 WebSockets 的浏览器的主机名.
-例如:假设您有一个公共地址为 192.168.1.100，可用 SSL 终止符 的 nginx 服务器,其端口 80 , 在127.0.0.1的 8000端口 上代理。要运行使用 nginx 代理,请执行以下操作:</li>
-</ul>
-<pre><code>mdbook serve path/to/book -p 8000 -n 127.0.0.1 --websocket-hostname 192.168.1.100
-</code></pre>
-<p>如果你想要实时重新加载,你需要通过 nginx 来代理 websocket 调用192.168.1.100:&lt;WS_PORT&gt;到127.0.0.1:&lt;WS_PORT&gt;。
--w选项会允许配置 websocket 端口.</p>
-<h4><a class="header" href="#--open-1" id="--open-1">--open</a></h4>
-<p>当你使用--open(-o)标志,mdbook 将在启动服务器后,在您的默认 Web 浏览器中打开该书.</p>
-<h4><a class="header" href="#--dest-dir-1" id="--dest-dir-1">--dest-dir</a></h4>
-<p>--dest-dir(-d)选项允许您更改书籍的输出目录。为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.</p>
-<h1><a class="header" href="#test-命令" id="test-命令">test 命令</a></h1>
-<p>写书时,有时需要一些自动化测试.例如,The Rust Programming Book使用了许多可能过时的代码示例。因此,能够自动测试这些代码示例对他们来说非常重要.
-mdBook 支持test将运行，书中所有可用测试的命令。目前,只支持 rustdoc 测试,但未来可能会扩展.</p>
-<h4><a class="header" href="#在一个代码块禁用测试" id="在一个代码块禁用测试">在一个代码块，禁用测试</a></h4>
-<p>rustdoc 不会测试，包含ignore属性的代码块:</p>
-<pre><code>```rust,ignore
-fn main() {}
-</code></pre>
-<pre><code>rustdoc 也不会测试，指定了除 Rust 之外的语言的代码块:
-</code></pre>
-<pre><code class="language-markdown">**Foo**: _bar_
-</code></pre>
-<pre><code>rustdoc不会测试，没有指定语言的代码块:
-</code></pre>
-<pre><code>This is going to cause an error!
-</code></pre>
-<pre><code>
-#### 指定目录
-test命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.
-</code></pre>
-<p>mdbook test path/to/book</p>
-<pre><code>
-#### --library-path
---library-path(-L)选项允许您，当rustdoc构建和测试示例时，将目录添加到搜索路径。可以指定多个目录(-L foo -L bar)，或用逗号分隔的列表(-L foo,bar).
-
-#### --dest-dir
---dest-dir(-d)选项允许您更改书籍的输出目录。为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.
-
-
-
-</code></pre>
-<h1><a class="header" href="#clean-命令" id="clean-命令">clean 命令</a></h1>
-<p>clean 命令用于删除生成的书籍，和任何其他构建工件.</p>
-<pre><code>mdbook clean
-</code></pre>
-<h4><a class="header" href="#指定目录-2" id="指定目录-2">指定目录</a></h4>
-<p>clean命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.</p>
-<pre><code>mdbook clean path/to/book
-</code></pre>
-<h4><a class="header" href="#--dest-dir-2" id="--dest-dir-2">--dest-dir</a></h4>
-<p>--dest-dir(-d)选项允许您覆盖书籍的输出目录,该目录会删除。 为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.</p>
-<pre><code>mdbook clean --dest-dir=path/to/book
-</code></pre>
-<p>path/to/book可以是绝对的，或相对的.</p>
-<h1><a class="header" href="#格式" id="格式">格式</a></h1>
-<p>在本节中,您将学习如何:</p>
-<ul>
-<li>正确构建您的书</li>
-<li>格式化你的SUMMARY.md文件</li>
-<li>使用book.toml配置您的图书</li>
-<li>自定义主题</li>
-</ul>
-<h1><a class="header" href="#summarymd" id="summarymd">SUMMARY.md</a></h1>
-<h1><a class="header" href="#配置" id="配置">配置</a></h1>
+                        <h1><a class="header" href="#配置" id="配置">配置</a></h1>
 <p>您可以在 book.toml 文件中配置图书的参数.
 这是一个 book.toml 文件示例，如下所示:</p>
 <pre><code>[book]
@@ -440,76 +317,21 @@ $ mdbook build
 <li>脚本或 CI 调用mdbook,</li>
 <li>有时在构建前，无法更新book.toml.</li>
 </ul>
-<h1><a class="header" href="#" id=""></a></h1>
-<h1><a class="header" href="#在持续集成中运行-mdbook" id="在持续集成中运行-mdbook">在持续集成中运行 mdbook</a></h1>
-<p>虽然以下示例中使用在Travis CI,但原则上应该，也可以直接转移到其他持续集成提供商.</p>
-<h2><a class="header" href="#确保mdbook的构建与测试成功" id="确保mdbook的构建与测试成功">确保mdbook的构建与测试成功</a></h2>
-<p>以下是Travis CI的.travis.yml示例，确保配置了mdbook build和mdbook test运行成功。加快CI运转时间的关键是缓存mdbook的安装,以便您可以不用每次CI运行就编译一次mdbook。</p>
-<pre><code>language: rust
-sudo: false
-
-cache:
-  - cargo
-
-rust:
-  - stable
-
-before_script:
-  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
-  - (test -x $HOME/.cargo/bin/mdbook || cargo install --vers &quot;^0.3&quot; mdbook)
-  - cargo install-update -a
-
-script:
-  - mdbook build path/to/mybook &amp;&amp; mdbook test path/to/mybook
-</code></pre>
-<h2><a class="header" href="#发布你的图书到-github-pages" id="发布你的图书到-github-pages">发布你的图书到 GitHub Pages</a></h2>
-<p>遵循这些命令的结果是，在您的存储库运行CI成功后,您的图书将发布到GitHub页面的master分支.
-首先,创建一个新的GitHub的”Personal Access Token”（个人访问令牌），保证”public_repo”权限(或私有存储库的”repo”)。转到Travis CI网站的该库设置页面，并添加一个名为GITHUB_TOKEN的环境变量，该变量能保证安全和不显示在日志中.
-然后,将此代码段附加到您的.travis.yml，并更新为book目录路径:</p>
-<blockquote>
-<p>book目录是mdbook build的默认输出目录，请根据你的构建目录填写</p>
-</blockquote>
-<pre><code>deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  local-dir: path/to/mybook/book
-  keep-history: false
-  on:
-    branch: master
-</code></pre>
-<p>就这样!</p>
-<h2><a class="header" href="#手动发布你的图书到-github-pages" id="手动发布你的图书到-github-pages">手动发布你的图书到 Github Pages</a></h2>
-<p>如果你的 CI 并不支持 GitHub pages, 或是与其他平台进行整合: 注意: 不要求一定是 tmp 目录:</p>
-<pre><code>$&gt; git worktree add /tmp/book gh-pages	# 应该是 新建 gh-pages 分支
-$&gt; mdbook build
-$&gt; rm -rf /tmp/book/* # this won't delete the .git directory
-$&gt; cp -rp book/* /tmp/book/
-$&gt; cd /tmp/book
-$&gt; git add -A	# 添加所有修改到暂存区
-$&gt; git commit -m 'new book message'	# 提交到分支
-$&gt; git push origin gh-pages	# 推送到远程库
-$&gt; cd -
-</code></pre>
-<p>或是放入 Makefile 文件:</p>
-<pre><code>.PHONY: deploy
-deploy: book
-    @echo &quot;====&gt; deploying to github&quot;
-    git worktree add /tmp/book gh-pages
-    rm -rf /tmp/book/*
-    cp -rp book/* /tmp/book/
-    cd /tmp/book &amp;&amp; \
-        git add -A &amp;&amp; \
-        git commit -m &quot;deployed on $(shell date) by ${USER}&quot; &amp;&amp; \
-        git push origin gh-pages
-</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="3.1_SUMMARY.md.md.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
+                        
+                            <a rel="next" href="3.3_Theme-主题.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -519,7 +341,15 @@ deploy: book
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a href="3.1_SUMMARY.md.md.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
+                
+                    <a href="3.3_Theme-主题.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
@@ -544,14 +374,6 @@ deploy: book
         <!-- Custom JS scripts -->
         
 
-        
-        
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-        
         
 
     </body>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>贡献者 - mdBook_Doc_zh</title>
+        <title>命令行工具 - mdBook_Doc_zh</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.html"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html" class="active"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
+                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html" class="active"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.html"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,17 +145,43 @@
 
                 <div id="content" class="content">
                     <main>
-                        
+                        <h1><a class="header" href="#命令行工具" id="命令行工具">命令行工具</a></h1>
+<p>mdBook既可以用作命令行工具,也可以用作Rust crate。让我们首先关注命令行工具功能.</p>
+<h2><a class="header" href="#从二进制文件安装" id="从二进制文件安装">从二进制文件安装</a></h2>
+<p>在尽力而为的基础上,预先编译主要平台的二进制文件。访问 releases 页面下载适合您平台的版本.</p>
+<h2><a class="header" href="#从源代码安装" id="从源代码安装">从源代码安装</a></h2>
+<p>mdBook也可以从源代码安装</p>
+<h2><a class="header" href="#前提条件" id="前提条件">前提条件</a></h2>
+<p>mdBook是写的 Rust 因此需要Cargo编译。如果您还没有安装Rust，请现在就官方安装。</p>
+<h2><a class="header" href="#安装cratesio版本" id="安装cratesio版本">安装Crates.io版本</a></h2>
+<p>如果您已安装Rust和Cargo,则安装mdBook相当容易。您只需在终端中键入以下代码段:</p>
+<pre><code>cargo install mdbook
+</code></pre>
+<p>这将在Crates.io获取最新版本的源代码，并编译它。你需要添加Cargo的bin目录，到你的环境变量PATH.
+在您的终端，运行mdbook help验证它是否有效。
+恭喜你,你已经安装了mdBook!</p>
+<h2><a class="header" href="#安装-git-版本" id="安装-git-版本">安装 Git 版本</a></h2>
+<p>该 git 版本 包含所有最新的错误修复和功能, 且是在下一个版本中才发布Crates.io, 如果你不能等到下一个版本。你可以自己构建git版本。打开终端，并导航到您选择的目录。我们需要克隆git存储库,然后使用Cargo构建它.</p>
+<pre><code>git clone --depth=1 https://github.com/rust-lang-nursery/mdBook.git
+cd mdBook
+cargo build --release
+</code></pre>
+<p>可执行文件mdbook输出在./target/release文件夹,这应该添加到环境变量PATH中，方便使用。</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="翻译来源.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="1_mdbook.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
+                        
+                            <a rel="next" href="2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -165,11 +191,15 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="翻译来源.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="1_mdbook.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
+                
+                    <a href="2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 

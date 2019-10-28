@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>mdbook - mdBook_Doc_zh</title>
+        <title>serve - mdBook_Doc_zh</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="1.html" class="active"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.html"><strong aria-hidden="true">3.</strong> build</a></li><li><a href="2.html"><strong aria-hidden="true">4.</strong> watch</a></li><li><a href="2.html"><strong aria-hidden="true">5.</strong> serve</a></li><li><a href="2.html"><strong aria-hidden="true">6.</strong> test</a></li><li><a href="2.html"><strong aria-hidden="true">7.</strong> clean</a></li><li><a href="3.html"><strong aria-hidden="true">8.</strong> 格式</a></li><li><a href="3.1_SUMMARY.html"><strong aria-hidden="true">9.</strong> SUMMARY.md</a></li><li><a href="3.html"><strong aria-hidden="true">10.</strong> 配置</a></li><li><a href="3.html"><strong aria-hidden="true">11.</strong> Theme-主题</a></li><li><a href="4.html"><strong aria-hidden="true">12.</strong> 持续集成</a></li><li><a href="5.html"><strong aria-hidden="true">13.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">14.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">15.</strong> 贡献者</a></li></ol>
+                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.html"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html" class="active"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,16 +145,45 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#mdbook" id="mdbook">mdbook</a></h1>
+                        <h1><a class="header" href="#the-serve-command" id="the-serve-command">The serve command</a></h1>
+<p>serve 命令用于通过 HTTP 服务来预览书籍，默认情况下localhost:3000。此外,它还会观察图书的目录的更改,自动重建图书，以及为每次更改刷新客户端。</p>
+<blockquote>
+<p>websocket 连接用于触发客户端刷新.</p>
+</blockquote>
+<h4><a class="header" href="#指定目录" id="指定目录">指定目录</a></h4>
+<p>serve命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.</p>
+<pre><code>mdbook serve path/to/book
+</code></pre>
+<h4><a class="header" href="#server-选项" id="server-选项">Server 选项</a></h4>
+<p>serve有四个选项:</p>
+<ul>
+<li>HTTP 端口,</li>
+<li>WebSocket 端口,</li>
+<li>要侦听的 HTTP 主机名,以及</li>
+<li>要连接到 WebSockets 的浏览器的主机名.
+例如:假设您有一个公共地址为 192.168.1.100，可用 SSL 终止符 的 nginx 服务器,其端口 80 , 在127.0.0.1的 8000端口 上代理。要运行使用 nginx 代理,请执行以下操作:</li>
+</ul>
+<pre><code>mdbook serve path/to/book -p 8000 -n 127.0.0.1 --websocket-hostname 192.168.1.100
+</code></pre>
+<p>如果你想要实时重新加载,你需要通过 nginx 来代理 websocket 调用192.168.1.100:&lt;WS_PORT&gt;到127.0.0.1:&lt;WS_PORT&gt;。
+-w选项会允许配置 websocket 端口.</p>
+<h4><a class="header" href="#--open" id="--open">--open</a></h4>
+<p>当你使用--open(-o)标志,mdbook 将在启动服务器后,在您的默认 Web 浏览器中打开该书.</p>
+<h4><a class="header" href="#--dest-dir" id="--dest-dir">--dest-dir</a></h4>
+<p>--dest-dir(-d)选项允许您更改书籍的输出目录。为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="2.3_watch.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
                         
-                            <a rel="next" href="2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="2.5_test.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -166,9 +195,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a href="2.3_watch.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
                 
-                    <a href="2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="2.5_test.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

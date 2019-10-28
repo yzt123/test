@@ -23,7 +23,7 @@ book-test/
 #### 指定目录
 init命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.
 ```
-mdbook init <目录路径>
+mdbook init path/to/book
 ```
 
 #### --theme

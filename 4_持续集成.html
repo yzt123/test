@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>SUMMARY.md - mdBook_Doc_zh</title>
+        <title>持续集成 - mdBook_Doc_zh</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="1.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.html"><strong aria-hidden="true">3.</strong> build</a></li><li><a href="2.html"><strong aria-hidden="true">4.</strong> watch</a></li><li><a href="2.html"><strong aria-hidden="true">5.</strong> serve</a></li><li><a href="2.html"><strong aria-hidden="true">6.</strong> test</a></li><li><a href="2.html"><strong aria-hidden="true">7.</strong> clean</a></li><li><a href="3.html"><strong aria-hidden="true">8.</strong> 格式</a></li><li><a href="3.1_SUMMARY.html" class="active"><strong aria-hidden="true">9.</strong> SUMMARY.md</a></li><li><a href="3.html"><strong aria-hidden="true">10.</strong> 配置</a></li><li><a href="3.html"><strong aria-hidden="true">11.</strong> Theme-主题</a></li><li><a href="4.html"><strong aria-hidden="true">12.</strong> 持续集成</a></li><li><a href="5.html"><strong aria-hidden="true">13.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">14.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">15.</strong> 贡献者</a></li></ol>
+                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.html"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html" class="active"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,20 +145,81 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#summarymd" id="summarymd">SUMMARY.md</a></h1>
+                        <h1><a class="header" href="#在持续集成中运行-mdbook" id="在持续集成中运行-mdbook">在持续集成中运行 mdbook</a></h1>
+<p>虽然以下示例中使用在Travis CI,但原则上应该，也可以直接转移到其他持续集成提供商.</p>
+<h2><a class="header" href="#确保mdbook的构建与测试成功" id="确保mdbook的构建与测试成功">确保mdbook的构建与测试成功</a></h2>
+<p>以下是Travis CI的.travis.yml示例，确保配置了mdbook build和mdbook test运行成功。加快CI运转时间的关键是缓存mdbook的安装,以便您可以不用每次CI运行就编译一次mdbook。</p>
+<pre><code>language: rust
+sudo: false
+
+cache:
+  - cargo
+
+rust:
+  - stable
+
+before_script:
+  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
+  - (test -x $HOME/.cargo/bin/mdbook || cargo install --vers &quot;^0.3&quot; mdbook)
+  - cargo install-update -a
+
+script:
+  - mdbook build path/to/mybook &amp;&amp; mdbook test path/to/mybook
+</code></pre>
+<h2><a class="header" href="#发布你的图书到-github-pages" id="发布你的图书到-github-pages">发布你的图书到 GitHub Pages</a></h2>
+<p>遵循这些命令的结果是，在您的存储库运行CI成功后,您的图书将发布到GitHub页面的master分支.
+首先,创建一个新的GitHub的”Personal Access Token”（个人访问令牌），保证”public_repo”权限(或私有存储库的”repo”)。转到Travis CI网站的该库设置页面，并添加一个名为GITHUB_TOKEN的环境变量，该变量能保证安全和不显示在日志中.
+然后,将此代码段附加到您的.travis.yml，并更新为book目录路径:</p>
+<blockquote>
+<p>book目录是mdbook build的默认输出目录，请根据你的构建目录填写</p>
+</blockquote>
+<pre><code>deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: path/to/mybook/book
+  keep-history: false
+  on:
+    branch: master
+</code></pre>
+<p>就这样!</p>
+<h2><a class="header" href="#手动发布你的图书到-github-pages" id="手动发布你的图书到-github-pages">手动发布你的图书到 Github Pages</a></h2>
+<p>如果你的 CI 并不支持 GitHub pages, 或是与其他平台进行整合: 注意: 不要求一定是 tmp 目录:</p>
+<pre><code>$&gt; git worktree add /tmp/book gh-pages	# 应该是 新建 gh-pages 分支
+$&gt; mdbook build
+$&gt; rm -rf /tmp/book/* # this won't delete the .git directory
+$&gt; cp -rp book/* /tmp/book/
+$&gt; cd /tmp/book
+$&gt; git add -A	# 添加所有修改到暂存区
+$&gt; git commit -m 'new book message'	# 提交到分支
+$&gt; git push origin gh-pages	# 推送到远程库
+$&gt; cd -
+</code></pre>
+<p>或是放入 Makefile 文件:</p>
+<pre><code>.PHONY: deploy
+deploy: book
+    @echo &quot;====&gt; deploying to github&quot;
+    git worktree add /tmp/book gh-pages
+    rm -rf /tmp/book/*
+    cp -rp book/* /tmp/book/
+    cd /tmp/book &amp;&amp; \
+        git add -A &amp;&amp; \
+        git commit -m &quot;deployed on $(shell date) by ${USER}&quot; &amp;&amp; \
+        git push origin gh-pages
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="3.3_Theme-主题.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="5_对开发者说.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -170,13 +231,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="3.3_Theme-主题.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="5_对开发者说.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
