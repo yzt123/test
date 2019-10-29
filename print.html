@@ -80,7 +80,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.html"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
+                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.1_init.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.2_build.html"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -178,23 +178,37 @@ cargo build --release
 </code></pre>
 <p>可执行文件mdbook输出在./target/release文件夹,这应该添加到环境变量PATH中，方便使用。</p>
 <h1><a class="header" href="#init" id="init">init</a></h1>
-<h1><a class="header" href="#build" id="build">build</a></h1>
+<h1><a class="header" href="#build命令" id="build命令">build命令</a></h1>
+<p>构建命令,用于渲染您的 md,并输出静态 html:</p>
+<pre><code>mdbook build
+</code></pre>
+<p>它会尝试解析你的SUMMARY.md文件，以了解您的图书的结构并获取相应的文件.
+为方便起见,渲染的输出将保持与源目录结构相同。因此,大型书籍在渲染时能保持结构化.</p>
+<h4><a class="header" href="#指定目录" id="指定目录">指定目录</a></h4>
+<p>build命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.</p>
+<pre><code>mdbook build path/to/book
+</code></pre>
+<h4><a class="header" href="#--open" id="--open">--open</a></h4>
+<p>当你使用--open(-o),mdbook 将在构建之后，在默认 Web 浏览器中打开网页书.</p>
+<h4><a class="header" href="#--dest-dir" id="--dest-dir">--dest-dir</a></h4>
+<h2><a class="header" href="#--dest-dir-d选项允许您更改书籍的输出目录为相对路径相对于书籍的根目录如果未指定则默认为booktoml配置的buildbuild-dir字段-或者book目录" id="--dest-dir-d选项允许您更改书籍的输出目录为相对路径相对于书籍的根目录如果未指定则默认为booktoml配置的buildbuild-dir字段-或者book目录">--dest-dir(-d)选项允许您更改书籍的输出目录。为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.</a></h2>
+<p>注意: 确保在根目录中运行 build 命令,而不是在源src目录中运行</p>
 <h1><a class="header" href="#watch-命令" id="watch-命令">watch 命令</a></h1>
 <p>当您希望在每次更改文件，都生成图书时, watch命令会很有用。你当然可以在每次更改文件反复发出mdbook build。但，聪明的是使用mdbook watch，这样就能观察您的文件,并会在您修改文件时，自动触发构建.</p>
-<h4><a class="header" href="#指定目录" id="指定目录">指定目录</a></h4>
+<h4><a class="header" href="#指定目录-1" id="指定目录-1">指定目录</a></h4>
 <p>watch命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.</p>
 <pre><code>mdbook watch path/to/book
 </code></pre>
-<h4><a class="header" href="#--open" id="--open">--open</a></h4>
+<h4><a class="header" href="#--open-1" id="--open-1">--open</a></h4>
 <p>当你使用--open(-o)选项,mdbook 将在您的默认 Web 浏览器中打开网页书.</p>
-<h4><a class="header" href="#--dest-dir" id="--dest-dir">--dest-dir</a></h4>
+<h4><a class="header" href="#--dest-dir-1" id="--dest-dir-1">--dest-dir</a></h4>
 <p>--dest-dir(-d)选项允许您更改书籍的输出目录。为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.</p>
 <h1><a class="header" href="#the-serve-command" id="the-serve-command">The serve command</a></h1>
 <p>serve 命令用于通过 HTTP 服务来预览书籍，默认情况下localhost:3000。此外,它还会观察图书的目录的更改,自动重建图书，以及为每次更改刷新客户端。</p>
 <blockquote>
 <p>websocket 连接用于触发客户端刷新.</p>
 </blockquote>
-<h4><a class="header" href="#指定目录-1" id="指定目录-1">指定目录</a></h4>
+<h4><a class="header" href="#指定目录-2" id="指定目录-2">指定目录</a></h4>
 <p>serve命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.</p>
 <pre><code>mdbook serve path/to/book
 </code></pre>
@@ -211,9 +225,9 @@ cargo build --release
 </code></pre>
 <p>如果你想要实时重新加载,你需要通过 nginx 来代理 websocket 调用192.168.1.100:&lt;WS_PORT&gt;到127.0.0.1:&lt;WS_PORT&gt;。
 -w选项会允许配置 websocket 端口.</p>
-<h4><a class="header" href="#--open-1" id="--open-1">--open</a></h4>
+<h4><a class="header" href="#--open-2" id="--open-2">--open</a></h4>
 <p>当你使用--open(-o)标志,mdbook 将在启动服务器后,在您的默认 Web 浏览器中打开该书.</p>
-<h4><a class="header" href="#--dest-dir-1" id="--dest-dir-1">--dest-dir</a></h4>
+<h4><a class="header" href="#--dest-dir-2" id="--dest-dir-2">--dest-dir</a></h4>
 <p>--dest-dir(-d)选项允许您更改书籍的输出目录。为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.</p>
 <h1><a class="header" href="#test-命令" id="test-命令">test 命令</a></h1>
 <p>写书时,有时需要一些自动化测试.例如,The Rust Programming Book使用了许多可能过时的代码示例。因此,能够自动测试这些代码示例对他们来说非常重要.
@@ -250,11 +264,11 @@ test命令可以将目录作为参数，用作本书的根目录，而不是当�
 <p>clean 命令用于删除生成的书籍，和任何其他构建工件.</p>
 <pre><code>mdbook clean
 </code></pre>
-<h4><a class="header" href="#指定目录-2" id="指定目录-2">指定目录</a></h4>
+<h4><a class="header" href="#指定目录-3" id="指定目录-3">指定目录</a></h4>
 <p>clean命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.</p>
 <pre><code>mdbook clean path/to/book
 </code></pre>
-<h4><a class="header" href="#--dest-dir-2" id="--dest-dir-2">--dest-dir</a></h4>
+<h4><a class="header" href="#--dest-dir-3" id="--dest-dir-3">--dest-dir</a></h4>
 <p>--dest-dir(-d)选项允许您覆盖书籍的输出目录,该目录会删除。 为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.</p>
 <pre><code>mdbook clean --dest-dir=path/to/book
 </code></pre>

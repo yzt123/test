@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>test - mdBook_Doc_zh</title>
+        <title>build - mdBook_Doc_zh</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -78,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.1_init.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.2_build.html"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html" class="active"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
+                <ol class="chapter"><li><a href="1_mdbook.html"><strong aria-hidden="true">1.</strong> mdbook</a></li><li><a href="2_命令行工具.html"><strong aria-hidden="true">2.</strong> 命令行工具</a></li><li><a href="2.1_init.html"><strong aria-hidden="true">3.</strong> init</a></li><li><a href="2.2_build.html" class="active"><strong aria-hidden="true">4.</strong> build</a></li><li><a href="2.3_watch.html"><strong aria-hidden="true">5.</strong> watch</a></li><li><a href="2.4_serve.html"><strong aria-hidden="true">6.</strong> serve</a></li><li><a href="2.5_test.html"><strong aria-hidden="true">7.</strong> test</a></li><li><a href="2.6_clean.html"><strong aria-hidden="true">8.</strong> clean</a></li><li><a href="3_格式.html"><strong aria-hidden="true">9.</strong> 格式</a></li><li><a href="3.1_SUMMARY.md.md.html"><strong aria-hidden="true">10.</strong> SUMMARY.md</a></li><li><a href="3.2_配置.html"><strong aria-hidden="true">11.</strong> 配置</a></li><li><a href="3.3_Theme-主题.html"><strong aria-hidden="true">12.</strong> Theme-主题</a></li><li><a href="4_持续集成.html"><strong aria-hidden="true">13.</strong> 持续集成</a></li><li><a href="5_对开发者说.html"><strong aria-hidden="true">14.</strong> 对开发者说</a></li><li><a href="翻译来源.html"><strong aria-hidden="true">15.</strong> 翻译来源</a></li><li><a href="贡献者.html"><strong aria-hidden="true">16.</strong> 贡献者</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,50 +145,34 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#test-命令" id="test-命令">test 命令</a></h1>
-<p>写书时,有时需要一些自动化测试.例如,The Rust Programming Book使用了许多可能过时的代码示例。因此,能够自动测试这些代码示例对他们来说非常重要.
-mdBook 支持test将运行，书中所有可用测试的命令。目前,只支持 rustdoc 测试,但未来可能会扩展.</p>
-<h4><a class="header" href="#在一个代码块禁用测试" id="在一个代码块禁用测试">在一个代码块，禁用测试</a></h4>
-<p>rustdoc 不会测试，包含ignore属性的代码块:</p>
-<pre><code>```rust,ignore
-fn main() {}
+                        <h1><a class="header" href="#build命令" id="build命令">build命令</a></h1>
+<p>构建命令,用于渲染您的 md,并输出静态 html:</p>
+<pre><code>mdbook build
 </code></pre>
-<pre><code>rustdoc 也不会测试，指定了除 Rust 之外的语言的代码块:
+<p>它会尝试解析你的SUMMARY.md文件，以了解您的图书的结构并获取相应的文件.
+为方便起见,渲染的输出将保持与源目录结构相同。因此,大型书籍在渲染时能保持结构化.</p>
+<h4><a class="header" href="#指定目录" id="指定目录">指定目录</a></h4>
+<p>build命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.</p>
+<pre><code>mdbook build path/to/book
 </code></pre>
-<pre><code class="language-markdown">**Foo**: _bar_
-</code></pre>
-<pre><code>rustdoc不会测试，没有指定语言的代码块:
-</code></pre>
-<pre><code>This is going to cause an error!
-</code></pre>
-<pre><code>
-#### 指定目录
-test命令可以将目录作为参数，用作本书的根目录，而不是当前工作目录.
-</code></pre>
-<p>mdbook test path/to/book</p>
-<pre><code>
-#### --library-path
---library-path(-L)选项允许您，当rustdoc构建和测试示例时，将目录添加到搜索路径。可以指定多个目录(-L foo -L bar)，或用逗号分隔的列表(-L foo,bar).
-
-#### --dest-dir
---dest-dir(-d)选项允许您更改书籍的输出目录。为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.
-
-
-
-</code></pre>
+<h4><a class="header" href="#--open" id="--open">--open</a></h4>
+<p>当你使用--open(-o),mdbook 将在构建之后，在默认 Web 浏览器中打开网页书.</p>
+<h4><a class="header" href="#--dest-dir" id="--dest-dir">--dest-dir</a></h4>
+<h2><a class="header" href="#--dest-dir-d选项允许您更改书籍的输出目录为相对路径相对于书籍的根目录如果未指定则默认为booktoml配置的buildbuild-dir字段-或者book目录" id="--dest-dir-d选项允许您更改书籍的输出目录为相对路径相对于书籍的根目录如果未指定则默认为booktoml配置的buildbuild-dir字段-或者book目录">--dest-dir(-d)选项允许您更改书籍的输出目录。为相对路径，（相对于书籍的根目录）。如果未指定,则默认为book.toml配置的build.build-dir字段, 或者./book目录.</a></h2>
+<p>注意: 确保在根目录中运行 build 命令,而不是在源src目录中运行</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="2.4_serve.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="2.1_init.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="2.6_clean.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="2.3_watch.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -200,13 +184,13 @@ test命令可以将目录作为参数，用作本书的根目录，而不是当�
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="2.4_serve.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="2.1_init.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="2.6_clean.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="2.3_watch.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
